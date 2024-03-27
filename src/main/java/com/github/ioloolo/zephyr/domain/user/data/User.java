@@ -27,6 +27,9 @@ public class User {
 	@Field("Name")
 	private String name;
 
+	@Field("Discord")
+	private long discord;
+
 	@Field("Ban")
 	private boolean ban;
 }

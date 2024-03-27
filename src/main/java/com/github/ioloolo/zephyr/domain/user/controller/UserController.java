@@ -32,7 +32,7 @@ public class UserController {
 
 		Optional<User> userOptional = repository.findBySteamId(steamId);
 		if (userOptional.isEmpty()) {
-			User user = User.builder().steamId(steamId).name(steamInfo.getName()).ban(true).build();
+			User user = User.builder().steamId(steamId).name(steamInfo.getName()).discord(0).ban(true).build();
 
 			repository.save(user);
 			userOptional = Optional.of(user);
