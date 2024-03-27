@@ -1,4 +1,4 @@
-package com.github.ioloolo.zephyr.domain.skin.payload;
+package com.github.ioloolo.zephyr.domain.skin.controller.payload;
 
 import lombok.Data;
 
