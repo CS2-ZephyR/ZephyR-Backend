@@ -45,7 +45,7 @@ public class UserController {
 
 		return ResponseEntity.ok(Map.ofEntries(
 				Map.entry("steamId", steamInfo.getSteamId()),
-				Map.entry("name", steamInfo.getName()),
+				Map.entry("name", user.getName()),
 				Map.entry("avatar", steamInfo.getAvatar())
 		));
 	}
