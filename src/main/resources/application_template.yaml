@@ -16,3 +16,6 @@ spring:
 
 app:
   steam: (steam_key)
+  server:
+    host: (host)
+    password: (password)

@@ -4,6 +4,16 @@
       "name": "app.steam",
       "type": "java.lang.String",
       "description": "Description for app.steam."
+    },
+    {
+      "name": "app.server.host",
+      "type": "java.lang.String",
+      "description": "Description for app.server.host."
+    },
+    {
+      "name": "app.server.password",
+      "type": "java.lang.String",
+      "description": "Description for app.server.password."
     }
   ]
 }
