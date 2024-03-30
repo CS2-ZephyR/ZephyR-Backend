@@ -2,7 +2,6 @@ package com.github.ioloolo.zephyr.domain.skin.controller;
 
 import java.util.Map;
 import java.util.Optional;
-import java.util.function.Function;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,30 +31,6 @@ public class SkinController {
 
 	private final SkinRepository repository;
 	private final UserRepository userRepository;
-
-	private final Function<String, Integer> KnifeToIndex = knife -> switch (knife) {
-		case "weapon_bayonet" -> 500;
-		case "weapon_knife_css" -> 503;
-		case "weapon_knife_flip" -> 505;
-		case "weapon_knife_gut" -> 506;
-		case "weapon_knife_karambit" -> 507;
-		case "weapon_knife_m9_bayonet" -> 508;
-		case "weapon_knife_tactical" -> 509;
-		case "weapon_knife_falchion" -> 512;
-		case "weapon_knife_survival_bowie" -> 514;
-		case "weapon_knife_butterfly" -> 515;
-		case "weapon_knife_push" -> 516;
-		case "weapon_knife_cord" -> 517;
-		case "weapon_knife_canis" -> 518;
-		case "weapon_knife_ursus" -> 519;
-		case "weapon_knife_gypsy_jackknife" -> 520;
-		case "weapon_knife_outdoor" -> 521;
-		case "weapon_knife_stiletto" -> 522;
-		case "weapon_knife_widowmaker" -> 523;
-		case "weapon_knife_skeleton" -> 525;
-		case "weapon_knife_kukri" -> 526;
-		default -> 0;
-	};
 
 	@PostMapping
 	public ResponseEntity<?> skinInfo(@RequestHeader("Authorization") long steamId) {
@@ -176,7 +151,6 @@ public class SkinController {
 		int glove = request.getGlove();
 
 		Skin skin = repository.findBySteamId(steamId).orElseThrow();
-		skin.getDetail().remove(skin.getGlove());
 		skin.setGlove(glove);
 
 		repository.save(skin);
@@ -197,7 +171,6 @@ public class SkinController {
 		String knife = request.getKnife();
 
 		Skin skin = repository.findBySteamId(steamId).orElseThrow();
-		skin.getDetail().remove(KnifeToIndex.apply(skin.getKnife()));
 		skin.setKnife(knife);
 
 		repository.save(skin);
