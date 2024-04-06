@@ -37,6 +37,9 @@ public class Skin {
 	@Field("Detail")
 	private Map<Integer, SkinDetail> detail = Map.of();
 
+	@Field("Smoke")
+	private Map<String, Integer> smoke = Map.of();
+
 	@Data
 	public static class Agent {
 

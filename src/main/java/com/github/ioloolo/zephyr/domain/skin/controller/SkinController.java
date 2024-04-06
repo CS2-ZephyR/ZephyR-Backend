@@ -17,6 +17,7 @@ import com.github.ioloolo.zephyr.domain.skin.controller.payload.UpdateKnifeReque
 import com.github.ioloolo.zephyr.domain.skin.controller.payload.UpdateModelRequest;
 import com.github.ioloolo.zephyr.domain.skin.controller.payload.UpdateMusicRequest;
 import com.github.ioloolo.zephyr.domain.skin.controller.payload.UpdateSkinRequest;
+import com.github.ioloolo.zephyr.domain.skin.controller.payload.UpdateSmokeRequest;
 import com.github.ioloolo.zephyr.domain.skin.data.Skin;
 import com.github.ioloolo.zephyr.domain.skin.repository.SkinRepository;
 import com.github.ioloolo.zephyr.domain.user.data.User;
@@ -172,6 +173,28 @@ public class SkinController {
 
 		Skin skin = repository.findBySteamId(steamId).orElseThrow();
 		skin.setKnife(knife);
+
+		repository.save(skin);
+
+		return ResponseEntity.ok().build();
+	}
+
+	@PutMapping("/smoke")
+	public ResponseEntity<?> updateSmokeColor(
+			@RequestHeader("Authorization") long steamId, @RequestBody UpdateSmokeRequest request
+	) {
+
+		Optional<User> userOptional = userRepository.findBySteamId(steamId);
+		if (userOptional.isEmpty() || userOptional.get().isBan()) {
+			return ResponseEntity.status(401).build();
+		}
+
+		int r = request.getR();
+		int g = request.getG();
+		int b = request.getB();
+
+		Skin skin = repository.findBySteamId(steamId).orElseThrow();
+		skin.setSmoke(Map.ofEntries(Map.entry("R", r), Map.entry("G", g), Map.entry("B", b)));
 
 		repository.save(skin);
 
